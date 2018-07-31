@@ -1,0 +1,35 @@
+<h1>
+  <b>Brick <%=h @brick.id %> Clusters: Sorted by User's Rerankings</b>
+</h1>
+
+<p>
+<%= link_to 'Back to Brick Index', bricks_path %>
+</p>
+
+<p>
+NOTE: Ratings go from 1 to 3<br>
+NOTE: Displayed Rating: RerankAvg | UserRating
+</p>
+
+<table>
+  <tr>
+  <% column = 0 %>
+  <% @sclusters.each do |c| %>
+  	<td id="indextable"><%= link_to image_tag(c.image_color, :height => '120'), sushow_cluster_path(c) %><br>
+  			<% if c.lookflag == 1 %><span id="lookflag"><%end%>
+  			<%= link_to c.id, sushow_cluster_path(c) %><br>
+  			<% if c.lookflag == 1 %></span><%end%>
+  			<%=h sprintf("%.2f",c.avgscore) %> | <%=h sprintf("%d",c.myrating(@user.username)) %>
+  	</td>
+		<% column += 1 %>
+  	<% if column==8 %>
+			<% column = 0 %>
+    	</tr><tr>
+		<% end %>
+	<% end %>
+	</tr>
+</table>
+
+<p>
+<%= link_to 'Back to Brick Index', bricks_path %>
+</p>

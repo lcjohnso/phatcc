@@ -1,0 +1,29 @@
+<h1>PHAT Bricks</h1>
+
+<p>NOTE: Good Clusters have PrelimRating < 2</p>
+<p>NOTE: View = Sorted by PrelimRating, UserSort = Sorted by UserRating, TotalSort = Sorted by AvgRerating</p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Cluster Views</th>
+    <th>Avg Ratings/Cluster</th>
+    <th><%=h @user.username %> Ratings Done</th>
+    <th>All Clusters</th>
+    <th>Good Clusters</th>
+    <th>Look Flags</th>
+  </tr>
+
+<% @bricks.each do |b| %>
+  <tr>
+    <td><%=h b.id%></td>
+    <td><%= link_to "OrigView", brick_path(b)%>  <%= link_to "UserSort", usersort_brick_path(b)%>  <%= link_to "TotalSort", sort_brick_path(b)%></td>
+    <td><%=h b.numcomplete %></td>
+    <td><%=h b.usernumcomplete(@user.username) %></td>
+    <td><%=h b.numberall %></td>
+    <td><%=h b.numbergood %></td>
+    <td><%=h b.numberlookflag %></td>
+  </tr>
+<% end %>
+
+</table>

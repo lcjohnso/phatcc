@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PHAT Cluster Catalog</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'phatcc', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <p style="color: red"><%= notice %></p>
+
+    <%= yield %>
+    
+  </body>
+</html>

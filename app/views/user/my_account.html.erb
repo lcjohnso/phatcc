@@ -1,0 +1,8 @@
+<h1>Account Info</h1>
+
+<% if flash[:message] %> 
+  <div><%= flash[:message] %></div>
+<% end %>
+
+<p>Your username is <%= @user.username %> </p>
+<p><%= link_to 'Logout', :controller => 'user', :action => 'logout' %> </p>

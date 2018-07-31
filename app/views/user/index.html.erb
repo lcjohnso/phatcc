@@ -1,0 +1,19 @@
+<h1>User Progress Summary</h1>
+
+<p><%= link_to 'Brick Index', bricks_path %></p>
+
+<p>Your username is <%= @user.username %> </p>
+
+<% tot = Float(@clusters.count) %>
+<% @users.each do |u| %>
+	<% ratings = Rating.find(:all, :conditions => {:user => u.username}) %>
+	<% num = Float(ratings.count) %>
+	<% percent = num/tot %>
+	<div style="width: 600px; background: #DDD; border: 2px solid black; height: 20px;">
+	<div style="width: <%=h Integer(percent * 600) %>px; background: red; height: 20px;">
+	</div></div>
+	<p><%=h u.username %>: <%=h Integer(num) %> / <%=h Integer(tot) %> (<%=h sprintf("%.2f",percent * 100) %>%)</p>
+	<br />
+<% end %>
+
+<p><%= link_to 'Brick Index', bricks_path %></p>

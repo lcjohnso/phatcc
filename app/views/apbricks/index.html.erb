@@ -1,0 +1,22 @@
+<h1>PHAT Bricks</h1>
+
+<p>NOTE: OrigView = Sorted by ViewFrac, CFSort = Sorted by ClusterFrac</p>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Views</th>
+    <th>All Objects</th>
+    <th>Good Clusters</th>
+  </tr>
+
+<% @apbricks.each do |b| %>
+  <tr>
+    <td><%=h b.id%></td>
+    <td><%= link_to "OrigView", apbrick_path(b)%>  <%= link_to "CFSort", csort_apbrick_path(b)%></td>
+    <td><%=h b.numberall %></td>
+    <td><%=h b.numbercluster %></td>
+  </tr>
+<% end %>
+
+</table>

@@ -1,0 +1,32 @@
+<h1>
+  <b>Brick <%=h @apbrick.id %> Objects</b>
+</h1>
+
+<p>
+<%= link_to 'Back to Brick Index', apbricks_path %>
+</p>
+
+<p>
+NOTE: Displayed Rating: ViewFrac | GalFrac
+</p>
+
+<table>
+  <tr>
+  <% column = 0 %>
+  <% @sclusters.each do |c| %>
+  	<td id="indextable"><%= link_to image_tag(c.image_color, :height => '120'), apbrick_apobject_path(@apbrick, c) %><br>
+  			<%= link_to c.id, apbrick_apobject_path(@apbrick, c) %><br>
+  			<%=h sprintf("%.2f",c.viewfrac) %> | <%=h sprintf("%.2f",c.galfrac) %>
+  	</td>
+		<% column += 1 %>
+  	<% if column==8 %>
+			<% column = 0 %>
+    	</tr><tr>
+		<% end %>
+	<% end %>
+	</tr>
+</table>
+
+<p>
+<%= link_to 'Back to Brick Index', apbricks_path %>
+</p>

@@ -1,0 +1,9 @@
+<h1>Comment on <%=h @cluster.fileid %></h1>
+
+<p>
+<b>User: <%=h @comment.user %></b><br />
+<%=h @comment.body %>
+</p>
+
+<%= link_to 'Edit Comment', edit_cluster_comment_path(@cluster, @comment) %> |
+<%= link_to 'Back to Cluster', @cluster %>

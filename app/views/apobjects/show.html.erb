@@ -1,0 +1,103 @@
+<h1>
+  <b><%=h @apobject.fileid.upcase %></b> <!--(<%=h @iclst+1 %> out of <%=h @apbrick.numberall %>)-->
+</h1>
+
+<% if flash[:message] %> 
+  <div><%= flash[:message] %></div>
+<% end %>
+
+<!-- Navigation -->
+<p>
+<% if not (@papobject.nil?) %><%= link_to '<< Previous Object', apobject_path(@papobject), :accesskey => "p" %><% end %>
+<% if not (@napobject.nil?) %><%= link_to 'Next Object >>', apobject_path(@napobject), :accesskey => "n" %><% end %>
+</p>
+<p>
+<%= link_to 'Back to Object Index', apbrick_path(@apbrick) %>
+</p>
+
+<!-- Basic Data Table -->
+<table>
+  <tr>
+    <th>RA</th>
+    <th>Dec</th>
+    <th>Subimage</th>
+    <th>HLR(arcsec)</th>
+    <th>M(475)</th>
+    <th>475</th>
+    <th>475-814</th>
+    <th>ViewFrac</th>
+    <th>GalFrac</th>
+    <th>AltID</th>
+    <th>Yr1ID</th>
+    <th>NC Link</th>
+  </tr>
+  <tr>
+    <td><%=h @apobject.ra %></td>
+    <td><%=h @apobject.dec %></td>
+    <td><%=h @apobject.subimg %></td>
+    <td><%=h @apobject.halfangular %></td>
+    <td><%=h @apobject.absmag %></td>
+    <td><%=h @apobject.obsmag %></td>
+    <td><%=h @apobject.optcolor %></td>
+    <td <%=h @apobject.prioritycolor %> ><%=h @apobject.viewfrac %></td>
+    <td <%=h @apobject.prioritycolor %> ><%=h @apobject.galfrac %></td>
+    <td <%=h @apobject.altidcolor %> ><%=h @apobject.altid %></td>
+    <td <%=h @apobject.yr1idcolor %> >
+      <a href="<%=h cluster_path(@apobject.yr1id) %>"><%=h @apobject.yr1id %></td>
+    <td><a href="<%=h @apobject.nclink %>"><%=h @apobject.ncid %></td>
+  </tr>
+</table>
+<br />
+
+<!-- Imaging -->
+<table>
+  <tr>
+  	<th>Color</th>
+  	<th>475</th>
+  	<th>814</th>
+  	<th>275</th>
+  	<th>336</th>
+  	<th>110</th>
+ 	<th>160</th>
+  </tr>
+  <tr>
+  	<td><%= image_tag(@apobject.image_color, :height => '200') %></td>
+  	<td><%= image_tag(@apobject.image_475, :height => '200') %></td>
+  	<td><%= image_tag(@apobject.image_814, :height => '200') %></td>
+  	<td><%= image_tag(@apobject.image_275, :height => '200') %></td>
+  	<td><%= image_tag(@apobject.image_336, :height => '200') %></td>
+  	<td><%= image_tag(@apobject.image_110, :height => '200') %></td>
+  	<td><%= image_tag(@apobject.image_160, :height => '200') %></td>
+  </tr>
+</table>
+<br />
+
+<!-- Images -->
+<%= image_tag(@apobject.cmd_image, :height => '300') %>
+<%= image_tag(@apobject.sed_image, :height => '300') %>
+<br />
+
+<!-- IntFit Images -->
+<%= image_tag(@apobject.intfit_pdf, :height => '200') %>
+<%= image_tag(@apobject.intfit_pdf2d, :height => '200') %>
+<br />
+
+<!-- Fit Images -->
+<%= image_tag(@apobject.fit_cmd, :height => '300') %>
+<%= image_tag(@apobject.fit_pdf, :height => '300') %>
+<%= image_tag(@apobject.fit_res, :height => '300') %>
+<br />
+
+<!-- Profile Fitting Image -->
+<p>Profile Fitting: King (left), KingMod (right)</p>
+<%= image_tag(@apobject.profile_image, :height => '400') %>
+<%= image_tag(@apobject.profilemod_image, :height => '400') %>
+
+<!-- Navigation -->
+<p>
+<% if not (@papobject.nil?) %><%= link_to '<< Previous Object', apobject_path(@papobject), :accesskey => "p" %><% end %>
+<% if not (@napobject.nil?) %><%= link_to 'Next Object >>', apobject_path(@napobject), :accesskey => "n" %><% end %>
+</p>
+<p>
+<%= link_to 'Back to Object Index', apbrick_path(@apbrick) %>
+</p>

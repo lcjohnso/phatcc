@@ -1,0 +1,24 @@
+<h1>Editing Comment</h1>
+
+<% if flash[:message] %> 
+  <div><%= flash[:message] %></div>
+<% end %>
+
+<% form_for([@cluster, @comment]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </p>
+  <p>
+    <%= f.label :body %><br />
+    <%= f.text_area :body, :size => "80x5" %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show Comment', cluster_comment_path(@cluster, @comment)%> |
+<%= link_to 'Back to Cluster', @cluster %>

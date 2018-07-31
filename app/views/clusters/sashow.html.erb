@@ -1,0 +1,151 @@
+<h1>
+  <b><%=h @cluster.fileid %></b> (<%=h @iclst+1 %> out of <%=h @brick.numberall %>)
+</h1>
+
+<% if flash[:message] %> 
+  <div><%= flash[:message] %></div>
+<% end %>
+
+<!-- Navigation -->
+<p>
+<% if not (@pcluster.nil?) %><%= link_to '<< Previous Cluster', sashow_cluster_path(@pcluster), :accesskey => "p" %><% end %>
+<% if not (@ncluster.nil?) %><%= link_to 'Next Cluster >>', sashow_cluster_path(@ncluster), :accesskey => "n" %><% end %>
+</p>
+<p>
+<%= link_to 'Back to Cluster Index', sort_brick_path(@brick) %>
+</p>
+
+<!-- Basic Data Table -->
+<table>
+  <tr>
+    <th>RA</th>
+    <th>Dec</th>
+    <th>HLRadius (pc)</th>
+    <th>M(475)</th>
+    <th>475</th>
+    <th>475-814</th>
+<!--
+    <th>Prelim Avg Rating</th>
+    <th>Prelim Users</th>
+    <th>Prelim User Ratings</th>
+-->
+    <th>AltId</th>
+    <th>LookFlag</th>
+  </tr>
+  <tr>
+    <td><%=h @cluster.ra %></td>
+    <td><%=h @cluster.dec %></td>
+    <td><%=h @cluster.halfphysical %></td>
+    <td><%=h @cluster.absmag %></td>
+    <td><%=h @cluster.obsmag %></td>
+    <td><%=h @cluster.optcolor %></td>
+<!--
+    <td <%=h @cluster.prioritycolor(@cluster.avgrat) %> ><%=h @cluster.avgrat %></td>
+    <td><%=h @cluster.preusers %></td>
+    <td><%=h @cluster.preratings %></td>
+-->
+    <td><%=h @cluster.altname %></td>
+    <%if @cluster.lookflag==1 %>
+    	<td bgcolor='red'><b>YES</b></td>
+    <%else%>
+    	<td>No</td>
+    <%end%>
+  </tr>
+</table>
+<br />
+
+<!-- Imaging -->
+<table>
+  <tr>
+  	<th>Color</th>
+  	<th>336</th>
+  	<th>475</th>
+  	<th>814</th>
+  	<th>160</th>
+  	<th>Context</th>
+  </tr>
+  <tr>
+  	<td><%= image_tag(@cluster.image_color, :height => '200') %></td>
+  	<td><%= image_tag(@cluster.image_336, :height => '200') %></td>
+  	<td><%= image_tag(@cluster.image_475, :height => '200') %></td>
+  	<td><%= image_tag(@cluster.image_814, :height => '200') %></td>
+  	<td><%= image_tag(@cluster.image_160, :height => '200') %></td>
+  	<td><a href="<%=h @cluster.image_context %>"><%= image_tag(@cluster.image_context, :height => '200') %></a></td>
+  </tr>
+</table>
+<br />
+
+<!-- ### Priority Assignment and Flags ### -->
+
+<!-- Display individual user priorities -->
+<% if @user.username == "PHAT" or @userrating.score > 0 %>
+<table>
+<tr>
+	<td>Current Ratings:</td>
+<% @cluster.ratings.each do |r| %>
+	<% if r.score > 0 %><td <%=h r.prioritycolor(r.score) %> ><%=h r.user %><br /><%=h r.score %></td><%end%>
+<% end %>
+</tr>
+</table>
+<br />
+<% end %>
+
+<!-- Begin Reduced Guest Access -->
+<% if @user.username != "PHAT" %>
+
+<!-- Nested Tables for Priority Ratings -->
+<table id="nestingtable">
+<tr>
+<td>
+
+<!-- Create/Update individual user priority -->
+<% form_for([@cluster, @userrating]) do |f| %>
+  <%= f.error_messages %>
+<table>
+<tr>
+	<td id="lefttable"><%= f.label "UserRating" %><br />
+			<%= f.hidden_field :user, :values => @user.username %>
+			<%= f.hidden_field :brick_id, :values => @cluster.brick_id %>
+			<%= f.radio_button :score, "1", :onclick => "this.form.submit();" %>1 = Cluster<br />
+	    <%= f.radio_button :score, "2", :onclick => "this.form.submit();" %>2 = Possible Cluster<br />
+	    <%= f.radio_button :score, "3", :onclick => "this.form.submit();" %>3 = Not a Cluster<br />
+<% end %>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+<!-- End Reduced Guest Access -->
+<%end%>
+
+<!-- ### Comments ### -->
+<h2>Comments</h2>
+<p>
+	<% if @cluster.comments.count == 0 %>
+		No Comments Posted
+	<% else %>
+		<% @cluster.comments.each do |cmt| %>
+  		<b><%=h cmt.user %>:</b>
+  		<%=h cmt.body %><br/>
+  		<% if @user.username == cmt.user %>
+  			<%= link_to 'Edit Comment', edit_cluster_comment_path(@cluster, cmt) %> |
+  			<%= link_to 'Delete Comment', cluster_comment_path(@cluster, cmt),
+  				:confirm => 'Are you sure?', :method => :delete %>
+  			<br/>
+  		<% end %>
+		<% end %>
+	<% end %>
+	<br />
+	<%= link_to 'New Comment', new_cluster_comment_path(@cluster) %>
+</p>
+
+<!-- Navigation -->
+<p>
+<% if not (@pcluster.nil?) %><%= link_to '<< Previous Cluster', sashow_cluster_path(@pcluster), :accesskey => "p" %><% end %>
+<% if not (@ncluster.nil?) %><%= link_to 'Next Cluster >>', sashow_cluster_path(@ncluster), :accesskey => "n" %><% end %>
+</p>
+<p>
+<%= link_to 'Back to Cluster Index', sort_brick_path(@brick) %>
+</p>
