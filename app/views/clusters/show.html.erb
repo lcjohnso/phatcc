@@ -2,7 +2,7 @@
   <b><%=h @cluster.fileid %></b> (<%=h @iclst+1 %> out of <%=h @brick.numberall %>)
 </h1>
 
-<% if flash[:message] %> 
+<% if flash[:message] %>
   <div><%= flash[:message] %></div>
 <% end %>
 
@@ -99,8 +99,7 @@
 <td>
 
 <!-- Create/Update individual user priority -->
-<% form_for([@cluster, @userrating]) do |f| %>
-  <%= f.error_messages %>
+<%= form_for([@cluster, @userrating]) do |f| %>
 <table>
 <tr>
 	<td id="lefttable"><%= f.label "UserRating" %><br />

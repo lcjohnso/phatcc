@@ -2,7 +2,7 @@
   <b><%=h @apobject.fileid.upcase %></b> <!--(<%=h @iclst+1 %> out of <%=h @apbrick.numberall %>)-->
 </h1>
 
-<% if flash[:message] %> 
+<% if flash[:message] %>
   <div><%= flash[:message] %></div>
 <% end %>
 
@@ -43,7 +43,9 @@
     <td <%=h @apobject.prioritycolor %> ><%=h @apobject.galfrac %></td>
     <td <%=h @apobject.altidcolor %> ><%=h @apobject.altid %></td>
     <td <%=h @apobject.yr1idcolor %> >
-      <a href="<%=h cluster_path(@apobject.yr1id) %>"><%=h @apobject.yr1id %></td>
+      <% if not (@apobject.yr1id.nil?) %>
+        <a href="<%=h cluster_path(@apobject.yr1id) %>"><%=h @apobject.yr1id %></td>
+      <% end %>
     <td><a href="<%=h @apobject.nclink %>"><%=h @apobject.ncid %></td>
   </tr>
 </table>

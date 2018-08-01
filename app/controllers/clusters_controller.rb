@@ -7,12 +7,12 @@ class ClustersController < ApplicationController
     @cluster = Cluster.find(params[:id])
     @brick = Brick.find(@cluster.brick_id)
     if @cluster.ratings.exists?(:user => @user.username)
-    	@userrating = @cluster.ratings.find(:first, :conditions => ["user = ?", @user.username])
+    	@userrating = @cluster.ratings.where("user = ?", @user.username).first
     else
     	@userrating = @cluster.ratings.build(:user => @user.username, :score => "0", :brick_id => @cluster.brick_id)
  		end
 
- 		sclusters = @brick.clusters.find(:all, :order => 'clusters.avgrat')
+ 		sclusters = @brick.clusters.all.order("clusters.avgrat")
  		@iclst = sclusters.index(@cluster)
  		if @cluster != sclusters.last
  			@ncluster = sclusters[@iclst+1]
@@ -26,7 +26,7 @@ class ClustersController < ApplicationController
     @cluster = Cluster.find(params[:id])
     @brick = Brick.find(@cluster.brick_id)
     if @cluster.ratings.exists?(:user => @user.username)
-    	@userrating = @cluster.ratings.find(:first, :conditions => ["user = ?", @user.username])
+    	@userrating = @cluster.ratings.where("user = ?", @user.username).first
     else
     	@userrating = @cluster.ratings.build(:user => @user.username, :score => "0", :brick_id => @cluster.brick_id)
  		end
@@ -46,12 +46,12 @@ class ClustersController < ApplicationController
     @cluster = Cluster.find(params[:id])
     @brick = Brick.find(@cluster.brick_id)
     if @cluster.ratings.exists?(:user => @user.username)
-    	@userrating = @cluster.ratings.find(:first, :conditions => ["user = ?", @user.username])
+    	@userrating = @cluster.ratings.where("user = ?", @user.username).first
     else
     	@userrating = @cluster.ratings.build(:user => @user.username, :score => "0", :brick_id => @cluster.brick_id)
  		end
 
- 		sclusters = @brick.clusters.find(:all, :order => 'clusters.avgscore')
+ 		sclusters = @brick.clusters.all.order("clusters.avgscore")
  		@iclst = sclusters.index(@cluster)
  		if @cluster != sclusters.last
  			@ncluster = sclusters[@iclst+1]

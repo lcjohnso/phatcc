@@ -31,14 +31,26 @@ Rails.application.routes.draw do
     end
   end
 
+  #resource "user" do
+  #  member do
+  #    get "process_login"
+  #    get "login"
+  #    get "logout"
+  #  end
+  #end
+
   #get 'user/:action', controller: 'user'
   #resource :user, only: ['login', 'logout', 'my_account', 'process_login']
   get 'user/login', to: 'user#login'
   get 'user/logout', to: 'user#logout'
-  get 'user/process_login', to: 'user#process_login'
+  get 'user/index', to: 'user#index'
+  post 'user/process_login', to: 'user#process_login'
+
   get 'login', to: 'user#login'
   get 'logout', to: 'user#logout'
 
-  get 'welcome/index'
-  root 'welcome#index'
+  #get 'welcome/index'
+  #root 'welcome#index'
+  get 'home/index'
+  root 'home#index'
 end

@@ -29,10 +29,10 @@ class UserController < ApplicationController
     end
   end
 
-#	def index
-#		@users = User.find(:all)
-#		@clusters = Cluster.find(:all)
-#	end
+	def index
+		@users = User.all
+		@clusters = Cluster.all
+	end
 
 #	def show
 #	end

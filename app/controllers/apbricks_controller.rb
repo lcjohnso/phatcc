@@ -9,7 +9,7 @@ class ApbricksController < ApplicationController
 
   def show
     @apbrick = Apbrick.find(params[:id])
-    @sclusters = @apbrick.apobjects.find(:all, :order => 'apobjects.viewfrac DESC')
+    @sclusters = @apbrick.apobjects.all.order(viewfrac: :desc)
   end
 
   def csort

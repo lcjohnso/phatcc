@@ -7,14 +7,14 @@ class ApobjectsController < ApplicationController
     @apobject = Apobject.find(params[:id])
     @apbrick = Apbrick.find(@apobject.apbrick_id)
 
-    sapobjects = @apbrick.apobjects.find(:all, :order => 'viewfrac DESC')
+    sapobjects = @apbrick.apobjects.all.order(viewfrac: :desc)
     @iclst = sapobjects.index(@apobject)
     if @apobject != sapobjects.last
-  	@napobject = sapobjects[@iclst+1]
+  	   @napobject = sapobjects[@iclst+1]
     end
 
     if @apobject != sapobjects.first
- 	@papobject = sapobjects[@iclst-1]
+ 	     @papobject = sapobjects[@iclst-1]
     end
   end
 

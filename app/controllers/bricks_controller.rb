@@ -9,12 +9,12 @@ class BricksController < ApplicationController
 
   def show
     @brick = Brick.find(params[:id])
-    @sclusters = @brick.clusters.find(:all, :order => 'clusters.avgrat')
+    @sclusters = @brick.clusters.all.order('clusters.avgrat')
   end
 
   def sort
     @brick = Brick.find(params[:id])
-    @sclusters = @brick.clusters.find(:all, :order => 'clusters.avgscore')
+    @sclusters = @brick.clusters.all.order('clusters.avgscore')
   end
 
   def usersort

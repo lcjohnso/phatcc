@@ -6,7 +6,7 @@
 
 <% tot = Float(@clusters.count) %>
 <% @users.each do |u| %>
-	<% ratings = Rating.find(:all, :conditions => {:user => u.username}) %>
+	<% ratings = Rating.where('user = ?', u.username) %>
 	<% num = Float(ratings.count) %>
 	<% percent = num/tot %>
 	<div style="width: 600px; background: #DDD; border: 2px solid black; height: 20px;">
